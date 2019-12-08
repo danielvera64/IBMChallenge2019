@@ -1,6 +1,7 @@
 
 from flask import Flask
 from flask_restful import Api
+from os import environ
 
 from services.microservice1 import Microservice1
 from services.microservice2 import Microservice2
@@ -29,4 +30,6 @@ api.add_resource(Microservice2,
                  resource_class_kwargs={'add_discarded': True})
 
 if __name__ == '__main__':
+    if environ.get('SERVER_NAME') is not None:
+        app.config['SERVER_NAME'] = environ.get('SERVER_NAME')
     app.run(debug=True)
