@@ -32,4 +32,5 @@ api.add_resource(Microservice2,
 if __name__ == '__main__':
     # if environ.get('SERVER_NAME') is not None:
     #     app.config['SERVER_NAME'] = environ.get('SERVER_NAME')
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.config['SERVER_NAME'] = '0.0.0.0:8080'
+    app.run(debug=True)
