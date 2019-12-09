@@ -1,0 +1,39 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "challenge",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/services/challenge",
+    "labels": {
+      "k8s-app": "challenge"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "tcp-80-5000-pqmb8",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 5000,
+        "nodePort": 31099
+      }
+    ],
+    "selector": {
+      "k8s-app": "challenge"
+    },
+    "clusterIP": "172.21.155.99",
+    "type": "LoadBalancer",
+    "sessionAffinity": "None",
+    "externalTrafficPolicy": "Cluster"
+  },
+  "status": {
+    "loadBalancer": {
+      "ingress": [
+        {
+          "ip": "169.57.210.74"
+        }
+      ]
+    }
+  }
+}

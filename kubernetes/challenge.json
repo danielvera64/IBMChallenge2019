@@ -1,0 +1,145 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "ibm-challenge-api",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/pods/ibm-challenge-api",
+    "labels": {
+      "k8s-app": "challenge"
+    },
+    "annotations": {
+      "kubernetes.io/psp": "ibm-privileged-psp"
+    }
+  },
+  "spec": {
+    "volumes": [
+      {
+        "name": "default-token-jbjr7",
+        "secret": {
+          "secretName": "default-token-jbjr7",
+          "defaultMode": 420
+        }
+      }
+    ],
+    "containers": [
+      {
+        "name": "challenge",
+        "image": "zakumi/challenge",
+        "resources": {},
+        "env": [
+          {
+            "name": "SERVER_NAME",
+            "value": "0.0.0.0:5000"
+          }
+        ],
+        "volumeMounts": [
+          {
+            "name": "default-token-jbjr7",
+            "readOnly": true,
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "terminationMessagePolicy": "File",
+        "imagePullPolicy": "Always",
+        "securityContext": {
+          "privileged": false
+        }
+      }
+    ],
+    "restartPolicy": "Always",
+    "terminationGracePeriodSeconds": 30,
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccountName": "default",
+    "serviceAccount": "default",
+    "nodeName": "10.150.35.244",
+    "securityContext": {},
+    "imagePullSecrets": [
+      {
+        "name": "default-icr-io"
+      },
+      {
+        "name": "default-us-icr-io"
+      },
+      {
+        "name": "default-uk-icr-io"
+      },
+      {
+        "name": "default-de-icr-io"
+      },
+      {
+        "name": "default-au-icr-io"
+      },
+      {
+        "name": "default-jp-icr-io"
+      }
+    ],
+    "schedulerName": "default-scheduler",
+    "tolerations": [
+      {
+        "key": "node.kubernetes.io/not-ready",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 600
+      },
+      {
+        "key": "node.kubernetes.io/unreachable",
+        "operator": "Exists",
+        "effect": "NoExecute",
+        "tolerationSeconds": 600
+      }
+    ],
+    "priority": 0,
+    "enableServiceLinks": true
+  },
+  "status": {
+    "phase": "Running",
+    "conditions": [
+      {
+        "type": "Initialized",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-09T03:10:01Z"
+      },
+      {
+        "type": "Ready",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-09T03:10:36Z"
+      },
+      {
+        "type": "ContainersReady",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-09T03:10:36Z"
+      },
+      {
+        "type": "PodScheduled",
+        "status": "True",
+        "lastProbeTime": null,
+        "lastTransitionTime": "2019-12-09T03:10:01Z"
+      }
+    ],
+    "hostIP": "10.150.35.244",
+    "podIP": "172.30.177.194",
+    "startTime": "2019-12-09T03:10:01Z",
+    "containerStatuses": [
+      {
+        "name": "challenge",
+        "state": {
+          "running": {
+            "startedAt": "2019-12-09T03:10:35Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "docker.io/zakumi/challenge:latest",
+        "imageID": "docker.io/zakumi/challenge@sha256:0414e42e98deb46d394e67cb791eae7a48613e17b6ee84eec3d6c378debc46da",
+        "containerID": "containerd://0b862a08c9a5e4de60a99bd03817f4fbf8e56bb209c65bbfa5cdbb4a72e2afae"
+      }
+    ],
+    "qosClass": "BestEffort"
+  }
+}
